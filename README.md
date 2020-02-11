@@ -1,5 +1,5 @@
 # strong_type
-strong typing via inheritance, with the ability to also inherit 'skills'/operations
+Strong typing via inheritance, with the ability to also inherit 'skills'/operations.
 
 A canonical example is math functions that desire a floating point angle as a parameter.
 Is this angle in degrees or radians? Probably radians.
