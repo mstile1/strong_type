@@ -5,7 +5,8 @@
 
 //-----------------------------------------------------------------------------
 
-#include "roam/float.h" // for float equality
+#include <cmath>       // for float equality
+#include <limits>      // for float equality
 
 #include <cstdint>     // for int operators
 #include <type_traits> // is_float
@@ -27,15 +28,18 @@ struct st_skill
     constexpr auto const& value() const { return underlying().get(); }
 };
 
-// Equality ( with safe float/double comparison specializations )
+// Equality ( with safe floating point compare )
 //=============================================================================
 namespace detail
 {
     template < typename T >
     [[nodiscard]] inline constexpr bool st_test_equality( T const& a, T const& b )
     {
-        if constexpr ( std::is_floating_point_v< T > ) {
-            return roam::fequal( a, b );
+        if constexpr ( std::is_floating_point_v< T > )
+        {   // safe float equality, not explicitly needed for strong types
+            auto constexpr c_base_eps = std::numeric_limits< T >::epsilon();
+            auto const scaled_eps = c_base_eps * std::fmax( std::fabs( a ), std::fabs( b ) );
+            return std::fabs( a - b ) <= scaled_eps;
         }
         else {
             return a == b;
