@@ -22,11 +22,11 @@ struct degree : public roam::strong_type< degree, double, roam::st_cmp, roam::st
 inline constexpr c_pi = 3.1415926536;
 inline degree::operator radian() const
 {
-    return radian{ this->get() * c_pi / 180 };
+    return radian{ this->get() / 180 * c_pi };
 }
 inline radian::operator degree() const
 {
-    return degree{ this->get() * 180 / c_pi };
+    return degree{ this->get() / c_pi * 180 };
 }
 
 //--------------------------------------------------------
