@@ -3,7 +3,7 @@ Strong typing via inheritance, with the ability to also inherit 'skills'/operati
 
 A canonical example is math functions that desire a floating point angle as a parameter.
 Is this angle in degrees or radians? Probably radians.
-But it's often common for data driven "angles" to be specified and stored as degrees as they're easier to reason about.
+But it's often common for data driven "angles" to be specified and stored as degrees as they're easier to visualize.
 
 ```
 struct degree;
@@ -29,13 +29,13 @@ inline radian::operator degree() const
     return degree{ this->get() / c_pi * 180 };
 }
 
+// common function signature
 //--------------------------------------------------------
+void apply_some_kind_of_rotation( float angle ); // please pass me radians
+apply_some_kind_of_rotation( 90.0 ); // whoops
 
-void apply_some_kind_of_rotation( float angle );
-apply_some_kind_of_rotation( 90.0 ); // did this do the right thing?
-
+// stronger function signature
 //--------------------------------------------------------
-
 void apply_some_kind_of_rotation( radian angle );
 
 double my_angle = 90.0;
