@@ -6,6 +6,15 @@ Is this angle in degrees or radians? Probably radians.
 But it's often common for data driven "angles" to be specified and stored as degrees as they're easier to visualize.
 
 ```
+// common function signature
+//--------------------------------------------------------
+void apply_some_kind_of_rotation( float angle ); // please pass me radians
+apply_some_kind_of_rotation( 90.0 ); // whoops
+```
+
+```
+// radian and degree strong types
+//--------------------------------------------------------
 struct degree;
 struct radian : public roam::strong_type< radian, double, roam::st_cmp, roam::st_math >
 {
@@ -29,12 +38,7 @@ inline radian::operator degree() const
     return degree{ this->get() / c_pi * 180 };
 }
 ```
-```
-// common function signature
-//--------------------------------------------------------
-void apply_some_kind_of_rotation( float angle ); // please pass me radians
-apply_some_kind_of_rotation( 90.0 ); // whoops
-```
+
 ```
 // stronger function signature
 //--------------------------------------------------------
