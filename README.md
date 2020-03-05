@@ -28,12 +28,14 @@ inline radian::operator degree() const
 {
     return degree{ this->get() / c_pi * 180 };
 }
-
+```
+```
 // common function signature
 //--------------------------------------------------------
 void apply_some_kind_of_rotation( float angle ); // please pass me radians
 apply_some_kind_of_rotation( 90.0 ); // whoops
-
+```
+```
 // stronger function signature
 //--------------------------------------------------------
 void apply_some_kind_of_rotation( radian angle );
